@@ -1,0 +1,51 @@
+@startuml
+protocol Destroyable {
+    +health: Int
+    +isDestroyed: Bool
+    +takeDamage(damage: Int): Int
+    +effectWhenDestroyed(gameState: GameState): Effect
+}
+
+protocol Jumpa
+
+protocol Collectible {
+    +effectWhenCollected(gameState: GameState): Effect
+}
+
+protocol GameObjectBehaviour {
+    +isAffectedByPhysics: Bool
+    +isVisible: Bool
+    +isMovable: Bool
+
+    +action(): Void
+    +move(to: Direction)
+}
+
+class Enemy implements Destroyable, GameObjectBehaviour {
+}
+
+class Block implements Destroyable, GameObjectBehaviour {
+}
+
+class Effect {
+    +execute(): Void
+}
+
+protocol PhysicsObject {
+    +center: CGPoint
+    +velocity: CGVector
+    +acceleration: CGVector
+    +mass: CGFloat
+}
+
+class CirclePhysicsObject implements PhysicsObject {
+    +radius: CGFloat
+}
+
+class RectanglePhysicsObject implements PhysicsObject {
+    +width: CGSize
+    +height: CGSize
+}
+
+
+@enduml
