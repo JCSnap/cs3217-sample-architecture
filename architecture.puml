@@ -49,3 +49,4 @@ class RectanglePhysicsObject implements PhysicsObject {
 
 
 @enduml
+
