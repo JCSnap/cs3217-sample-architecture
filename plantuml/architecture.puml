@@ -3,6 +3,13 @@
 protocol Effectable {
     +effect(gameState: GameState): Effect
 }
+
+protocol Animatable {
+    +toAnimate: Anination
+    +startAnimation(): Void
+    +stopAnimation(): Void
+}
+
 protocol Destroyable extends Effectable {
     +health: Int
     +isDestroyed: Bool
@@ -16,6 +23,10 @@ protocol Collidable {
     +handleCollisionOn(side: Side, with: Collidable): Void
 }
 
+protocol Movable {
+    +move(to: Direction)
+}
+
 protocol Collectible extends Effectable {
     +effect(gameState: GameState): Effect
 }
@@ -23,32 +34,38 @@ protocol Collectible extends Effectable {
 protocol GameObjectBehaviour {
     +isAffectedByPhysics: Bool
     +isVisible: Bool
-    +isMovable: Bool
 
     +action(): Void
-    +move(to: Direction)
 }
 
 class Power implements Effectable {
     +effect(gameState: GameState): Effect
 }
 
-class Enemy implements Destroyable, GameObjectBehaviour {
+class Enemy implements Destroyable, GameObjectBehaviour, Movable, Animatable {
 }
 
-class Block implements Destroyable, GameObjectBehaviour {
+class Block implements Destroyable, GameObjectBehaviour, Movable, Animatable {
 }
 
 class Effect {
     +execute(): Void
 }
 
-class Player implements GameObjectBehaviour, Collidable {
+class Player implements GameObjectBehaviour, Collidable, Movable, Animatable {
     +health: Int
     +lives: Int
     +strength: Int
     +speed: Int
     +power: Power
+}
+
+class Projectile implements CirclePhysicsObject, Collidable, Animatable {
+    +damage: Int
+    +speed: Int
+    +lifetime: Int
+    +owner: GameObject
+    +onHit(gameObject: GameObject): Void
 }
 
 protocol PhysicsObject {
@@ -66,7 +83,6 @@ class RectanglePhysicsObject implements PhysicsObject {
     +width: CGSize
     +height: CGSize
 }
-
 
 @enduml
 
