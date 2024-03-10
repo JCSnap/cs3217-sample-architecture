@@ -1,0 +1,35 @@
+@startuml
+class LevelDesignerViewModel {
+}
+
+class GameViewModel {
+}
+
+class Renderer {
+}
+
+protocol Persistence {
+}
+
+class PersistenceManager implements Persistence {
+}
+
+class InputManager {
+}
+
+class AudioManager {
+}
+
+class GameStateManager {
+}
+
+class LevelManager {
+}
+
+class GameLoopManager {
+}
+
+class AnimationManager {
+}
+
+@enduml

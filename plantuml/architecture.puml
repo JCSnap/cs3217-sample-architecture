@@ -1,15 +1,23 @@
 @startuml
-protocol Destroyable {
+
+protocol Effectable {
+    +effect(gameState: GameState): Effect
+}
+protocol Destroyable extends Effectable {
     +health: Int
     +isDestroyed: Bool
     +takeDamage(damage: Int): Int
-    +effectWhenDestroyed(gameState: GameState): Effect
+    +effect(gameState: GameState): Effect
 }
 
-protocol Jumpa
+protocol Collidable {
+    +isCollidingWith(other: Collidable): Bool
+    +handleCollision(with: Collidable): Void
+    +handleCollisionOn(side: Side, with: Collidable): Void
+}
 
-protocol Collectible {
-    +effectWhenCollected(gameState: GameState): Effect
+protocol Collectible extends Effectable {
+    +effect(gameState: GameState): Effect
 }
 
 protocol GameObjectBehaviour {
@@ -21,6 +29,10 @@ protocol GameObjectBehaviour {
     +move(to: Direction)
 }
 
+class Power implements Effectable {
+    +effect(gameState: GameState): Effect
+}
+
 class Enemy implements Destroyable, GameObjectBehaviour {
 }
 
@@ -29,6 +41,14 @@ class Block implements Destroyable, GameObjectBehaviour {
 
 class Effect {
     +execute(): Void
+}
+
+class Player implements GameObjectBehaviour, Collidable {
+    +health: Int
+    +lives: Int
+    +strength: Int
+    +speed: Int
+    +power: Power
 }
 
 protocol PhysicsObject {
