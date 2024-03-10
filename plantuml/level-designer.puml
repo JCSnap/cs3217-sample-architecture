@@ -1,0 +1,27 @@
+@startuml
+class Enemy extends BoardObject {
+}
+
+class Block extends BoardObject {
+}
+
+class Grid {
+    contains: BoardObject
+}
+
+class Board {
+    name: String
+    width: Int
+    height: Int
+}
+
+class BoardObject {
+    center: CGPoint
+    width: Int
+    height: Int
+    objects: [BoardObject]
+}
+
+Board *-- "many" Grid
+Grid --> BoardObject
+@enduml

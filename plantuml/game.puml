@@ -42,17 +42,17 @@ class Power implements Effectable {
     +effect(gameState: GameState): Effect
 }
 
-class Enemy implements Destroyable, GameObjectBehaviour, Movable, Animatable {
+class GameEnemy implements Destroyable, GameObjectBehaviour, Movable, Animatable {
 }
 
-class Block implements Destroyable, GameObjectBehaviour, Movable, Animatable {
+class GameBlock implements Destroyable, GameObjectBehaviour, Movable, Animatable {
 }
 
 class Effect {
     +execute(): Void
 }
 
-class Player implements GameObjectBehaviour, Collidable, Movable, Animatable {
+class GamePlayer implements GameObjectBehaviour, Collidable, Movable, Animatable {
     +health: Int
     +lives: Int
     +strength: Int
