@@ -8,8 +8,8 @@
 
 ## Game
 
-~[Game](./images/game.png)
+![Game](./images/game.png)
 
 ## Renderer
 
--[Renderer](./images/renderer.png)
+![Renderer](./images/renderer.png)
