@@ -9,9 +9,12 @@ class Renderer {
 }
 
 protocol Persistence {
+    +saveLevel(level: Level)
+    +loadLevel(levelName: string): Level
+    +deleteLevel(levelName: string)
 }
 
-class PersistenceManager implements Persistence {
+class JsonPersistenceManager implements Persistence {
 }
 
 class InputManager {
@@ -31,5 +34,15 @@ class GameLoopManager {
 
 class AnimationManager {
 }
+
+LevelDesignerViewModel *-- Persistence
+GameViewModel *-- Persistence
+GameViewModel *-- Renderer
+GameViewModel *-- InputManager
+GameViewModel *-- AudioManager
+GameViewModel *-- GameStateManager
+GameViewModel *-- LevelManager
+GameViewModel *-- GameLoopManager
+GameViewModel *-- AnimationManager
 
 @enduml
