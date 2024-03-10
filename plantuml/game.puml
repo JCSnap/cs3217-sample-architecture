@@ -1,4 +1,7 @@
 @startuml
+class EntitiesAndComponentsManager {
+}
+
 class GameObject {
     identifier: String
     center: CGPoint
@@ -7,10 +10,6 @@ class GameObject {
 protocol Component {
     identifier: String
     gameObject: GameObject
-}
-
-protocol Effectable {
-    +effect(gameState: GameState): Effect
 }
 
 struct Renderable implements Component {
@@ -25,7 +24,7 @@ struct Animatable implements Component {
     +stopAnimation(): Void
 }
 
-struct Destroyable implements Effectable, Component {
+struct Destroyable implements Component {
     +health: Int
     +isDestroyed: Bool
     +takeDamage(damage: Int): Int
@@ -38,32 +37,21 @@ struct Collidable implements Component {
     +handleCollisionOn(side: Side, with: Collidable): Void
 }
 
-struct Movable {
-    +move(to: Direction)
+struct Movable implements Component {
+    +direction: Direction
+    +value: Int
 }
 
-struct Droppable {
-    +drop(): Collectible
+struct Droppable implements Component {
+    +drop: Collectible
 }
 
-class Collectible extends GameObject implements Effectable {
-    +effect(gameState: GameState): Effect
-}
-
-struct GameObjectBehaviour implements Component {
-    +isAffectedByPhysics: Bool
-    +isVisible: Bool
-
-    +action(): Void
-}
-
-struct Power implements Effectable {
-    +effect(gameState: GameState): Effect
+class Collectible extends GameObject {
+    animatable: Animatable
 }
 
 class GameEnemy extends GameObject {
     +destroyable: Destroyable
-    +gameObjectBehaviour: GameObjectBehaviour
     +movable: Movable
     +animatable: Animatable
     +droppable: Droppable
@@ -72,20 +60,14 @@ class GameEnemy extends GameObject {
 
 class GameBlock extends GameObject {
     +destroyable: Destroyable
-    +gameObjectBehaviour: GameObjectBehaviour
     +movable: Movable
     +animatable: Animatable
     +droppable: Droppable
     +physicsObject: PhysicsObject
 }
 
-class Effect {
-    +execute(): Void
-}
-
 class GamePlayer extends GameObject {
     +destroyable: Destroyable
-    +gameObjectBehaviour: GameObjectBehaviour
     +movable: Movable
     +animatable: Animatable
     +power: Power
@@ -103,16 +85,12 @@ struct Damageable extends Component {
     +onHit(gameObject: GameObject): Void
 }
 
-class Projectile {
+class Projectile extends GameObject {
     +damageable: Damageable
     +lifetime: Lifetime
     +movable: Movable
     +animatable: Animatable
     +physicsObject: CirclePhysicsObject
-}
-
-class GameObjectFactory {
-    +createGameObject(type: BoardObject): GameObject
 }
 
 protocol PhysicsObject {
@@ -122,7 +100,7 @@ protocol PhysicsObject {
     +mass: CGFloat
 
     +isCollidingWith(other: CirclePhysicsObject): Bool
-    +isCollidingWith(other: RectanglePhysicsObject: Bool
+    +isCollidingWith(other: RectanglePhysicsObject): Bool
     +handleCollision(with: CirclePhysicsObject): Void
     +handleCollision(with RectanglePhysicsObject): Void
 }
@@ -136,5 +114,7 @@ class RectanglePhysicsObject implements PhysicsObject {
     +height: CGSize
 }
 
+EntitiesAndComponentsManager --> GameObject
+EntitiesAndComponentsManager --> Component
 @enduml
 

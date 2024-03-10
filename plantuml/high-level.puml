@@ -18,9 +18,23 @@ class JsonPersistenceManager implements Persistence {
 }
 
 class EntitiesAndComponentsManager {
+    +entities: [GameObject]
+    +componentToEntities: [ComponentId: Set<GameObject>]
 }
 
 class SystemsManager {
+}
+
+class AnimationSystem {
+}
+
+class PhysicsSystem {
+}
+
+class CollisionSystem {
+}
+
+class MovementSystem {
 }
 
 LevelDesignerViewModel *-- Persistence
@@ -28,5 +42,9 @@ GameViewModel *-- Persistence
 GameViewModel *-- Renderer
 GameViewModel *-- EntitiesAndComponentsManager
 GameViewModel *-- SystemsManager
+SystemsManager --> AnimationSystem
+SystemsManager --> PhysicsSystem
+SystemsManager --> CollisionSystem
+SystemsManager --> MovementSystem
 
 @enduml
