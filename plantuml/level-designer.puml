@@ -13,6 +13,9 @@ class Block extends BoardObject {
 class Collectible extends BoardObject {
 }
 
+class PowerUp extends BoardObject {
+}
+
 class Grid {
     contains: BoardObject
 }
