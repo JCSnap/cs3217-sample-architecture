@@ -1,0 +1,10 @@
+@startuml
+participant GameViewModel as GVM
+participant Renderer as R
+
+GVM -> R: getGameObjectsToRender(center, grids)
+R -> R: getBoundsBasedOnCenter(center) -> CGBounds
+R -> R: getGridsWithinBounds(bound) -> [Grid]
+R -> R: getGameObjectsWithinBounds(grids) -> [GameObject]
+R -> GVM: [GameObject]
+@enduml

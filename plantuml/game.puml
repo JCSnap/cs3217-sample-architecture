@@ -81,6 +81,12 @@ protocol PhysicsObject {
     +velocity: CGVector
     +acceleration: CGVector
     +mass: CGFloat
+
+    +isCollidingWith(other: CirclePhysicsObject): Bool
+    +isCollidingWith(other: RectanglePhysicsObject: Bool
+    +handleCollision(with: CirclePhysicsObject): Void
+    +handleCollision(with RectanglePhysicsObject): Void
+
 }
 
 class CirclePhysicsObject implements PhysicsObject {
