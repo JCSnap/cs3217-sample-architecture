@@ -17,32 +17,16 @@ protocol Persistence {
 class JsonPersistenceManager implements Persistence {
 }
 
-class InputManager {
+class EntitiesAndComponentsManager {
 }
 
-class AudioManager {
-}
-
-class GameStateManager {
-}
-
-class LevelManager {
-}
-
-class GameLoopManager {
-}
-
-class AnimationManager {
+class SystemsManager {
 }
 
 LevelDesignerViewModel *-- Persistence
 GameViewModel *-- Persistence
 GameViewModel *-- Renderer
-GameViewModel *-- InputManager
-GameViewModel *-- AudioManager
-GameViewModel *-- GameStateManager
-GameViewModel *-- LevelManager
-GameViewModel *-- GameLoopManager
-GameViewModel *-- AnimationManager
+GameViewModel *-- EntitiesAndComponentsManager
+GameViewModel *-- SystemsManager
 
 @enduml
