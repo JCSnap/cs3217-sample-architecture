@@ -1,8 +1,16 @@
 @startuml
+class LevelDesignerViewModel {
+    selectedObject: BoardObject
+    selectedObjectType: BoardObjectType
+}
+
 class Enemy extends BoardObject {
 }
 
 class Block extends BoardObject {
+}
+
+class Collectible extends BoardObject {
 }
 
 class Grid {
@@ -15,6 +23,18 @@ class Board {
     height: Int
 }
 
+class Palette {
+}
+
+class HealthSetter {
+}
+
+class MovementSetter {
+}
+
+class DropSetter {
+}
+
 class BoardObject {
     center: CGPoint
     width: Int
@@ -24,4 +44,9 @@ class BoardObject {
 
 Board *-- "many" Grid
 Grid --> BoardObject
+Palette *-- HealthSetter
+Palette *-- MovementSetter
+Palette *-- DropSetter
+LevelDesignerViewModel *-- Board
+LevelDesignerViewModel *-- Palette
 @enduml

@@ -27,6 +27,10 @@ protocol Movable {
     +move(to: Direction)
 }
 
+protocol Droppable {
+    +drop(): Collectible
+}
+
 protocol Collectible extends Effectable {
     +effect(gameState: GameState): Effect
 }
@@ -42,10 +46,10 @@ class Power implements Effectable {
     +effect(gameState: GameState): Effect
 }
 
-class GameEnemy implements Destroyable, GameObjectBehaviour, Movable, Animatable {
+class GameEnemy implements Destroyable, GameObjectBehaviour, Movable, Animatable, Droppable {
 }
 
-class GameBlock implements Destroyable, GameObjectBehaviour, Movable, Animatable {
+class GameBlock implements Destroyable, GameObjectBehaviour, Movable, Animatable, Droppable {
 }
 
 class Effect {
@@ -66,6 +70,10 @@ class Projectile implements CirclePhysicsObject, Collidable, Animatable {
     +lifetime: Int
     +owner: GameObject
     +onHit(gameObject: GameObject): Void
+}
+
+class GameObjectFactory {
+    +createGameObject(type: BoardObject): GameObject
 }
 
 protocol PhysicsObject {

@@ -11,6 +11,7 @@
 - `Player` - Like `Enemy` and `Block`, it conforms to `GameObjectBehaviour`. It also has additional properties like "health", "lives", or even "Power"
 - `Power` - conforms to `Effectable`, which can modify game state when called. This allows extensions such as modifying the game environment, shooting pellets etc.
 - `Animatable` - contains a field to determine what to animate, since an object could have multiple animations. (eg. players could be running, or jumping, shooting etc.), and functions to start and stop animation.
+- `Droppable` - indicates what to drop
 
 ## Physics
 
